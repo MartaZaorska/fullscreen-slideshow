@@ -1,5 +1,4 @@
 const createFullscreenSlideshow = (() => {
-
   const templateFullscreenSlideshow = document.createElement("template");
   templateFullscreenSlideshow.innerHTML = `
     <style>
@@ -134,7 +133,7 @@ const createFullscreenSlideshow = (() => {
         margin-right: 0.5em;
       }
 
-      @media screen and (min-width: 768px){
+      @media screen and (min-width: 992px){
         .fullscreen-slideshow__content {
           height: 70vh;
           transition: all 0.3s ease-out;
@@ -179,7 +178,7 @@ const createFullscreenSlideshow = (() => {
         }
       }
 
-      @media screen and (min-width: 768px) and (max-height: 500px){
+      @media screen and (min-width: 992px) and (max-height: 500px){
         .fullscreen-slideshow__content {
           height: 50vh;
         }
@@ -214,12 +213,12 @@ const createFullscreenSlideshow = (() => {
         </button>
       </div>
     </div>
+    
   `;
 
   class FullscreenSlideshow extends HTMLElement {
     constructor(data, options){
       super();
-
       this.data = data;
       this.options = {
         background: "rgb(18 24 31)",
@@ -232,6 +231,7 @@ const createFullscreenSlideshow = (() => {
       
       this.activeIndex = 0;
       this.prevTranslate = 0;
+
       this.touchesEventData = {
         isDragging: false,
         startPosition: 0,
@@ -241,13 +241,14 @@ const createFullscreenSlideshow = (() => {
       this.attachShadow({mode: 'open'});
       this.shadowRoot.appendChild(templateFullscreenSlideshow.content.cloneNode(true));
       this.updateStyleProperty();
+      this.create();
     }
 
     updateStyleProperty(){
       this.shadowRoot.querySelector(".fullscreen-slideshow").style.setProperty("--background", this.options.background);
       this.shadowRoot.querySelector(".fullscreen-slideshow").style.setProperty("--color", this.options.fontColor);
       this.shadowRoot.querySelector(".fullscreen-slideshow").style.setProperty("--controlsDisplay", this.options.controls ? "flex" : "none");
-      Array.from(this.shadowRoot.querySelectorAll(".arrow line")).forEach(item => item.setAttribute("stroke", this.options.fontColor));
+      this.shadowRoot.querySelectorAll(".arrow line").forEach(item => item.setAttribute("stroke", this.options.fontColor));
     }
 
     getText(item){
@@ -364,7 +365,7 @@ const createFullscreenSlideshow = (() => {
       this.create();
     }
 
-    //Events Handlers  
+    //Events Handlers
     touchStartHandler = (e) => {
       this.touchesEventData.startPosition = e.touches[0].clientX;
       this.touchesEventData.isDragging = true;
@@ -421,7 +422,7 @@ const createFullscreenSlideshow = (() => {
     }
 
     //returned functions
-
+    
     openHandler = (index = 0) => this.open(index);
 
     closeHandler = () => this.close();
@@ -445,5 +446,4 @@ const createFullscreenSlideshow = (() => {
   }
 
   return createFullscreenSlideshow;
-  
 })();
