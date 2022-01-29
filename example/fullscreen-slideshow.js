@@ -2,7 +2,7 @@ const createFullscreenSlideshow = (() => {
   const templateFullscreenSlideshow = document.createElement("template");
   templateFullscreenSlideshow.innerHTML = `
     <style>
-      .fullscreen-slideshow * {
+      .container * {
         box-sizing: border-box;
         margin: 0;
         padding: 0;
@@ -10,7 +10,7 @@ const createFullscreenSlideshow = (() => {
         -webkit-tap-highlight-color: transparent;
       }
 
-      .fullscreen-slideshow {
+      .container {
         --background: rgb(18 24 31);
         --color: #eee;
         --controlsDisplay: flex;
@@ -23,11 +23,11 @@ const createFullscreenSlideshow = (() => {
         color: var(--color);
       }
 
-      .fullscreen-slideshow--open {
+      .container--open {
         display: flex;
       }
 
-      .fullscreen-slideshow__button {
+      .container button {
         background: transparent;
         border: none;
         cursor: pointer;
@@ -38,13 +38,13 @@ const createFullscreenSlideshow = (() => {
         font-family: inherit;
       }
 
-      .fullscreen-slideshow__button:active,
-      .fullscreen-slideshow__button:focus {
+      .container button:active,
+      .container button:focus {
         outline: none;
         -webkit-tap-highlight-color: transparent;
       }
 
-      .fullscreen-slideshow__button:hover {
+      .container button:hover {
         opacity: 1;
       }
 
@@ -79,7 +79,7 @@ const createFullscreenSlideshow = (() => {
         transform: rotate(0deg);
       }
 
-      .fullscreen-slideshow__controls {
+      .controls {
         position: fixed;
         z-index: 60;
         bottom: 1.8em;
@@ -87,18 +87,18 @@ const createFullscreenSlideshow = (() => {
         display: none;
       }
 
-      .arrow {
+      .controls button {
         margin-inline: 0.2em;
         width: 30px;
         height: 30px;
         transform: scale(0.75);
       }
 
-      .arrow:hover {
+      .controls button:hover {
         transform: scale(0.85);
       }
 
-      .fullscreen-slideshow__content {
+      .content {
         margin: auto;
         display: inline-flex;
         scrollbar-width: none;
@@ -109,7 +109,7 @@ const createFullscreenSlideshow = (() => {
         z-index: 50;
       }
 
-      .fullscreen-slideshow__item  {
+      .item  {
         width: 100vw;
         height: auto;
         display: flex;
@@ -117,7 +117,7 @@ const createFullscreenSlideshow = (() => {
         transition: all 0.07s ease;
       }
 
-      .fullscreen-slideshow__item img {
+      .item img {
         height: fit-content;
         width: fit-content;
         max-width: 100vw;
@@ -128,7 +128,7 @@ const createFullscreenSlideshow = (() => {
         pointer-events: none;
       }
 
-      .fullscreen-slideshow__text {
+      .text {
         display: none;
         color: inherit;
         font-size: 0.8em;
@@ -138,18 +138,18 @@ const createFullscreenSlideshow = (() => {
         pointer-events: none;
       }
 
-      .fullscreen-slideshow__text span.number {
+      .number {
         font-weight: normal;
         margin-right: 0.5em;
       }
 
       @media screen and (min-width: 992px){
-        .fullscreen-slideshow__content {
+        .content {
           height: 70vh;
           transition: all 0.3s ease-out;
         }
 
-        .fullscreen-slideshow__item {
+        .item {
           height: 100%;
           max-height: 68vh;
           width: auto;
@@ -158,7 +158,7 @@ const createFullscreenSlideshow = (() => {
           transition: all 0.2s;
         }
 
-        .fullscreen-slideshow__item img {
+        .item img {
           height: 100%;
           width: auto;
           max-height: 68vh;
@@ -168,53 +168,53 @@ const createFullscreenSlideshow = (() => {
           transition: all 0.2s;
         }
 
-        .fullscreen-slideshow__item--active {
+        .item--active {
           z-index: 10;
           box-shadow: 0px 20px 30px -18px rgba(0,0,0,0.5);
           transform: scale(1.1);
         }
 
-        .fullscreen-slideshow__item--active .fullscreen-slideshow__text {
+        .item--active .text {
           display: flex;
         }
 
-        .fullscreen-slideshow__item--active img {
+        .item--active img {
           filter: none;
           opacity: 1;
         }
 
-        .fullscreen-slideshow__controls {
+        .controls {
           display: var(--controlsDisplay);
         }
       }
 
       @media screen and (min-width: 992px) and (max-height: 500px){
-        .fullscreen-slideshow__content {
+        .content {
           height: 50vh;
         }
 
-        .fullscreen-slideshow__item {
+        .item {
           max-height: 48vh;
         }
 
-        .fullscreen-slideshow__item img {
+        .item img {
           max-height: 48vh;
         }
       }
     </style>
 
-    <div class="fullscreen-slideshow">
-      <button class="close fullscreen-slideshow__button"><span></span></button>
-      <div class="fullscreen-slideshow__content"></div>
-      <div class="fullscreen-slideshow__controls">
-        <button class="prev arrow fullscreen-slideshow__button">
+    <div class="container">
+      <button class="close"><span></span></button>
+      <div class="content"></div>
+      <div class="controls">
+        <button class="prev">
           <svg width="30px" height="30px">
             <line x1="3" y1="15" x2="27" y2="15" stroke-linecap="round" stroke="black" stroke-width="2"></line>
             <line x1="3" y1="15" x2="12" y2="7" stroke-linecap="round" stroke="black" stroke-width="2"></line>
             <line x1="3" y1="15" x2="12" y2="23" stroke-linecap="round" stroke="black" stroke-width="2"></line>
           </svg>
         </button>
-        <button class="next arrow fullscreen-slideshow__button">
+        <button class="next">
           <svg width="30px" height="30px">
             <line x1="3" y1="15" x2="27" y2="15" stroke-linecap="round" stroke="#eee" stroke-width="2"></line>
             <line x1="27" y1="15" x2="19" y2="7" stroke-linecap="round" stroke="#eee" stroke-width="2"></line>
@@ -223,7 +223,6 @@ const createFullscreenSlideshow = (() => {
         </button>
       </div>
     </div>
-    
   `;
 
   class FullscreenSlideshow extends HTMLElement {
@@ -255,10 +254,10 @@ const createFullscreenSlideshow = (() => {
     }
 
     updateStyleProperty(){
-      this.shadowRoot.querySelector(".fullscreen-slideshow").style.setProperty("--background", this.options.background);
-      this.shadowRoot.querySelector(".fullscreen-slideshow").style.setProperty("--color", this.options.fontColor);
-      this.shadowRoot.querySelector(".fullscreen-slideshow").style.setProperty("--controlsDisplay", this.options.controls ? "flex" : "none");
-      this.shadowRoot.querySelectorAll(".arrow line").forEach(item => item.setAttribute("stroke", this.options.fontColor));
+      this.shadowRoot.querySelector(".container").style.setProperty("--background", this.options.background);
+      this.shadowRoot.querySelector(".container").style.setProperty("--color", this.options.fontColor);
+      this.shadowRoot.querySelector(".container").style.setProperty("--controlsDisplay", this.options.controls ? "flex" : "none");
+      this.shadowRoot.querySelectorAll(".controls line").forEach(item => item.setAttribute("stroke", this.options.fontColor));
     }
 
     getText(item){
@@ -271,16 +270,16 @@ const createFullscreenSlideshow = (() => {
     }
 
     create(){
-      const content = this.shadowRoot.querySelector(".fullscreen-slideshow__content");
+      const content = this.shadowRoot.querySelector(".content");
       content.innerHTML = "";
 
       this.data.forEach((item, index) => {
         const element = document.createElement("div");
-        element.classList.add("fullscreen-slideshow__item");
+        element.classList.add("item");
         element.setAttribute("data-index", index);
 
         const paragraph = document.createElement("p");
-        paragraph.classList.add("fullscreen-slideshow__text");
+        paragraph.classList.add("text");
 
         const text = this.getText(item);
 
@@ -316,7 +315,7 @@ const createFullscreenSlideshow = (() => {
     }
 
     displayActive = () => {
-      this.shadowRoot.querySelector(".fullscreen-slideshow__item--active")?.classList.remove('fullscreen-slideshow__item--active');
+      this.shadowRoot.querySelector(".item--active")?.classList.remove('item--active');
       const nextActiveElement = this.shadowRoot.querySelector(`div[data-index="${this.activeIndex}"]`);
       
       if(!nextActiveElement){
@@ -325,16 +324,16 @@ const createFullscreenSlideshow = (() => {
         return;
       } 
 
-      nextActiveElement.classList.add("fullscreen-slideshow__item--active");
+      nextActiveElement.classList.add("item--active");
       const translate = ((window.innerWidth - nextActiveElement.getBoundingClientRect().width) / 2) - nextActiveElement.getBoundingClientRect().left;
-      this.shadowRoot.querySelector(".fullscreen-slideshow__content").style.transform = `translateX(${this.prevTranslate + translate}px)`;
+      this.shadowRoot.querySelector(".content").style.transform = `translateX(${this.prevTranslate + translate}px)`;
       this.prevTranslate += translate;
     }
 
     open(index = 0) {
-      if(!this.shadowRoot.querySelector(".fullscreen-slideshow__item")) this.create();
+      if(!this.shadowRoot.querySelector(".item")) this.create();
       this.activeIndex = index < 0 || index >= this.data.length ? 0 : index;
-      this.shadowRoot.querySelector(".fullscreen-slideshow").classList.add("fullscreen-slideshow--open");
+      this.shadowRoot.querySelector(".container").classList.add("container--open");
       this.displayActive();
 
       window.addEventListener("keyup", this.keyUpHandler);
@@ -342,8 +341,8 @@ const createFullscreenSlideshow = (() => {
     }
 
     close(){ 
-      this.shadowRoot.querySelector(".fullscreen-slideshow").classList.remove("fullscreen-slideshow--open");
-      this.shadowRoot.querySelector(".fullscreen-slideshow__content").style.transform = "translateX(0px)";
+      this.shadowRoot.querySelector(".container").classList.remove("container--open");
+      this.shadowRoot.querySelector(".content").style.transform = "translateX(0px)";
       this.prevTranslate = 0;
       this.activeIndex = 0;
       this.touchesEventData.isDragging = false;
@@ -405,7 +404,7 @@ const createFullscreenSlideshow = (() => {
     }
 
     clickItemHandler = (e) => {
-      if(!e.target.classList.contains("fullscreen-slideshow__item--active")){
+      if(!e.target.classList.contains("item--active")){
         this.activeIndex = +e.target.getAttribute("data-index");
         this.displayActive();
       }
