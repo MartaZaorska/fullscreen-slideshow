@@ -2,11 +2,12 @@ const createFullscreenSlideshow = (() => {
   const templateFullscreenSlideshow = document.createElement("template");
   templateFullscreenSlideshow.innerHTML = `
     <style>
-      * {
+      .fullscreen-slideshow * {
         box-sizing: border-box;
         margin: 0;
         padding: 0;
         border: 0;
+        -webkit-tap-highlight-color: transparent;
       }
 
       .fullscreen-slideshow {
@@ -32,6 +33,15 @@ const createFullscreenSlideshow = (() => {
         cursor: pointer;
         color: inherit;
         opacity: 0.8;
+        -webkit-tap-highlight-color: transparent;
+        outline: none;
+        font-family: inherit;
+      }
+
+      .fullscreen-slideshow__button:active,
+      .fullscreen-slideshow__button:focus {
+        outline: none;
+        -webkit-tap-highlight-color: transparent;
       }
 
       .fullscreen-slideshow__button:hover {
