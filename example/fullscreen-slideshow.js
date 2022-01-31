@@ -23,7 +23,7 @@ const createFullscreenSlideshow = (() => {
         color: var(--color);
       }
 
-      .container--open {
+      .open {
         display: flex;
       }
 
@@ -168,17 +168,17 @@ const createFullscreenSlideshow = (() => {
           transition: all 0.2s;
         }
 
-        .item--active {
+        .active {
           z-index: 10;
           box-shadow: 0px 20px 30px -18px rgba(0,0,0,0.5);
           transform: scale(1.1);
         }
 
-        .item--active .text {
+        .active .text {
           display: flex;
         }
 
-        .item--active img {
+        .active img {
           filter: none;
           opacity: 1;
         }
@@ -315,7 +315,7 @@ const createFullscreenSlideshow = (() => {
     }
 
     displayActive = () => {
-      this.shadowRoot.querySelector(".item--active")?.classList.remove('item--active');
+      this.shadowRoot.querySelector(".active")?.classList.remove('active');
       const nextActiveElement = this.shadowRoot.querySelector(`div[data-index="${this.activeIndex}"]`);
       
       if(!nextActiveElement){
@@ -324,7 +324,7 @@ const createFullscreenSlideshow = (() => {
         return;
       } 
 
-      nextActiveElement.classList.add("item--active");
+      nextActiveElement.classList.add("active");
       const translate = ((window.innerWidth - nextActiveElement.getBoundingClientRect().width) / 2) - nextActiveElement.getBoundingClientRect().left;
       this.shadowRoot.querySelector(".content").style.transform = `translateX(${this.prevTranslate + translate}px)`;
       this.prevTranslate += translate;
@@ -333,7 +333,7 @@ const createFullscreenSlideshow = (() => {
     open(index = 0) {
       if(!this.shadowRoot.querySelector(".item")) this.create();
       this.activeIndex = index < 0 || index >= this.data.length ? 0 : index;
-      this.shadowRoot.querySelector(".container").classList.add("container--open");
+      this.shadowRoot.querySelector(".container").classList.add("open");
       this.displayActive();
 
       window.addEventListener("keyup", this.keyUpHandler);
@@ -341,7 +341,7 @@ const createFullscreenSlideshow = (() => {
     }
 
     close(){ 
-      this.shadowRoot.querySelector(".container").classList.remove("container--open");
+      this.shadowRoot.querySelector(".container").classList.remove("open");
       this.shadowRoot.querySelector(".content").style.transform = "translateX(0px)";
       this.prevTranslate = 0;
       this.activeIndex = 0;
@@ -404,7 +404,7 @@ const createFullscreenSlideshow = (() => {
     }
 
     clickItemHandler = (e) => {
-      if(!e.target.classList.contains("item--active")){
+      if(!e.target.classList.contains("active")){
         this.activeIndex = +e.target.getAttribute("data-index");
         this.displayActive();
       }
