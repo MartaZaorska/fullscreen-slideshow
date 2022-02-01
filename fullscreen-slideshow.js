@@ -55,6 +55,8 @@ const createFullscreenSlideshow = (() => {
         z-index: 100;
         width: 20px;
         height: 20px;
+        transform: scale(0.95);
+        transition: all 0.1s;
       }
 
       .close span, .close span::after {
@@ -64,7 +66,6 @@ const createFullscreenSlideshow = (() => {
         height: 2px;
         border-radius: 1px;
         background: var(--color);
-        transition: all 0.1s;
       }
 
       .close span {
@@ -75,8 +76,8 @@ const createFullscreenSlideshow = (() => {
         transform: rotate(-90deg);
       }
 
-      .close:hover span, .close:hover span::after {
-        transform: rotate(0deg);
+      .close:hover {
+        transform: scale(1);
       }
 
       .controls {
@@ -153,6 +154,7 @@ const createFullscreenSlideshow = (() => {
           height: 100%;
           max-height: 68vh;
           width: auto;
+          max-width: 90vw;
           display: block;
           overflow: visible;
           transition: all 0.2s;
