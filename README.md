@@ -99,6 +99,9 @@ update(otherData);
 close();
 ```
 
+
+React component FullscreenSlideshow: [react-fullscreen-slideshow](https://github.com/MartaZaorska/react-fullscreen-slideshow)
+
 ## Demo
 
 Example of use on the website: https://martazaorska.github.io/fullscreen-slideshow/
