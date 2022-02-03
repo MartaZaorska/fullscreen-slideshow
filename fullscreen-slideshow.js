@@ -2,7 +2,7 @@ const createFullscreenSlideshow = (() => {
   const templateFullscreenSlideshow = document.createElement("template");
   templateFullscreenSlideshow.innerHTML = `
     <style>
-      .container * {
+      .container, .container * {
         box-sizing: border-box;
         margin: 0;
         padding: 0;
