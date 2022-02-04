@@ -413,9 +413,9 @@ const createFullscreenSlideshow = (() => {
     }
 
     keyUpHandler = (e) => {
-      if(e.code === "ArrowRight" || e.code === "ArrowDown"){
+      if(e.code === "ArrowRight"){
         this.nextItemHandler();
-      }else if(e.code === "ArrowLeft" || e.code === "ArrowUp"){
+      }else if(e.code === "ArrowLeft"){
         this.prevItemHandler();
       }else if(e.code === "Escape"){
         this.close();
