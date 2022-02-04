@@ -1,6 +1,6 @@
 # Fullscreen Slideshow
 
->Library/script that you can add to your website with a simple fullscreen slideshow. 
+> Fullscreen slideshow library/script that you can add to your website. 
 
 ![Example Fullscreen Slideshow](/images/example-fullscreen-slideshow.png?raw=true)
 
@@ -19,7 +19,7 @@ Download the fullscreen-slideshow.js file and add the script tag to the html fil
 To add a FullscreenSlideshow call the function:
 
 ```javascript
-const fullscreenSlideshow = createFullscreenSlideshow(data, options?);
+const fullscreenSlideshow = createFullscreenSlideshow(data, options);
 const { open, close, update } = fullscreenSlideshow;
 open(); 
 ```
@@ -72,7 +72,7 @@ const options = {
 
 Change images (desktop):
 
-- keyboard buttons: ArrowLeft, ArrowUp, ArrowRight and ArrowDown,
+- keyboard buttons: ArrowLeft, ArrowRight
 - clicking on the next/prev image,
 - arrow icons (if controls are set to true)
 
