@@ -12,7 +12,7 @@
 
 ## Usage
 
-Download the fullscreen-slideshow.js file and add the script tag to the html file, for example:
+Download the ***fullscreen-slideshow.js*** file and add the script tag to the html file, for example:
 ```html
 <script src="./fullscreen-slideshow.js"></script>
 ```
